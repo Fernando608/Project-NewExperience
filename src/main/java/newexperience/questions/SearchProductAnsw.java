@@ -3,24 +3,27 @@ package newexperience.questions;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import net.serenitybdd.screenplay.questions.Text;
-import newexperience.tasks.SearchProduct;
 import newexperience.userinterface.SearchProductPage;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class SearchProductAnsw implements Question {
-
+public class SearchProductAnsw implements Question<String> {
     @Override
-    public Boolean answeredBy(Actor actor) {
-        boolean res;
-        String total = (SearchProductPage.TOTAL_PRODUCT.resolveFor(actor).getText());
-        if (total.contains(SearchProduct.sum_qty())){
-            res = true;
-        }else{
-            res = false;
+    public String  answeredBy(Actor actor) {
+        String quantity = "";
+        String sms_shopping = Text.of(SearchProductPage.TOTAL_PRODUCT).viewedBy(actor).asString();
+        ArrayList<Character> list_number = new ArrayList<>();
+        for(int i = 0; i < sms_shopping.length(); i ++) {
+            if(Character.isDigit(sms_shopping.charAt(i))) {
+                list_number.add(sms_shopping.charAt(i));
+            }
         }
-        return res;
+        for(int j = 0; j < list_number.size();j ++)  {
+            quantity +=list_number.get(j);
+        }
+        return quantity;
     }
 
-    public static SearchProductAnsw vl(){return new SearchProductAnsw();}
-}
+    public static Question<String> value() {  return new SearchProductAnsw(); }
+
+    }

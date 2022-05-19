@@ -8,4 +8,6 @@ Feature: As a customer the new experience, I want to buy in clothes in the store
   When user search and adds items
      | product                        |  qty | size | color  |
      | Faded Short Sleeve T-shirts    |  2   |  M   | Blue   |
-  Then verify quantity of items
+     | Printed Chiffon Dress          |  3   |  M   | Green  |
+     | Blouse                         |  4   |  L   | White  |
+  Then verify quantity of items 9

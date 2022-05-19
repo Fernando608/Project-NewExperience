@@ -43,18 +43,9 @@ public class SearchProduct implements Task {
                     Click.on(BUTTON_CLOSE)
             );
         }
-
         actor.attemptsTo(
                 DoubleClick.on(BUTTON_CART)
         );
-
-        System.out.println("La suma es: "+(sum+2));
-       suma = String.valueOf(sum);
-
-        public String sum_qty(){
-
-            return suma;
-        }
 
     }
 

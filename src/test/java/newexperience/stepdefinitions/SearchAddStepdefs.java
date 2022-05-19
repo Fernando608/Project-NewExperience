@@ -15,8 +15,9 @@ import newexperience.tasks.SearchProduct;
 
 import java.util.List;
 
-import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class SearchAddStepdefs {
     @Before
@@ -31,11 +32,10 @@ public class SearchAddStepdefs {
     public void userSearchAndAddsItems(List<ItemsData>itemsData) {
         theActorInTheSpotlight().attemptsTo(SearchProduct.SP(itemsData));
     }
-    @Then("^verify quantity of items$")
-    public void verifyQuantityOfItems() {
-        theActorInTheSpotlight().should(GivenWhenThen.seeThat(SearchProductAnsw.vl()));
+
+    @Then("^verify quantity of items (.*)$")
+    public void verifyQuantityOfItems(String quantity) {
+        theActorInTheSpotlight().should(
+                GivenWhenThen.seeThat(SearchProductAnsw.value(), equalTo(quantity)));
     }
-
-
-
 }
